@@ -46,7 +46,7 @@ public class CreditoControllerTest {
     }
 
     @Test
-    void buscarPorNumeroCredito_deveRetornar404SeNaoExiste() throws Exception {
+    void buscarPorNumeroCredito_deveRetornarVazioSeNaoExiste() throws Exception {
         when(creditoService.buscarPorNumeroCredito("000000")).thenReturn(null);
 
         mockMvc.perform(get("/api/creditos/credito/000000"))
