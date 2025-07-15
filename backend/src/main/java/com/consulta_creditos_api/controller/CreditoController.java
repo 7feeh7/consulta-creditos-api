@@ -24,8 +24,6 @@ public class CreditoController {
 
     @GetMapping("/credito/{numeroCredito}")
     public Credito buscarPorNumeroCredito(@PathVariable String numeroCredito) {
-        System.out.println(numeroCredito);
-        return service.buscarPorNumeroCredito(numeroCredito)
-                .orElseThrow(() -> new RuntimeException("Crédito não encontrado"));
+        return service.buscarPorNumeroCredito(numeroCredito);
     }
 }
