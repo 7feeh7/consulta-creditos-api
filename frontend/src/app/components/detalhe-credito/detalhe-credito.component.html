@@ -1,1 +1,66 @@
-<h1>Detalhe Credito</h1>
+<div class="container mt-4">
+    <button (click)="voltar()" class="btn btn-outline-secondary mb-3">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </button>
+
+    <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="credito" class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Detalhes do Crédito {{credito.numeroCredito}}</h5>
+            <small class="text-white-50">NFS-e: {{credito.numeroNfse}}</small>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Número do Crédito:</strong> {{credito.numeroCredito}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Número da NFS-e:</strong> {{credito.numeroNfse}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Data de Constituição:</strong> {{credito.dataConstituicao | date:'dd/MM/yyyy'}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Tipo de Crédito:</strong> {{credito.tipoCredito}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Valor ISSQN:</strong> {{credito.valorIssqn | currency:'BRL'}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Simples Nacional:</strong> {{credito.simplesNacional ? 'Sim' : 'Não'}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Alíquota:</strong> {{credito.aliquota}}%
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Valor Faturado:</strong> {{credito.valorFaturado | currency:'BRL'}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Valor Dedução:</strong> {{credito.valorDeducao | currency:'BRL'}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Base de Cálculo:</strong> {{credito.baseCalculo | currency:'BRL'}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center mt-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+        <p class="mt-2">Carregando detalhes do crédito...</p>
+    </div>
+</div>
