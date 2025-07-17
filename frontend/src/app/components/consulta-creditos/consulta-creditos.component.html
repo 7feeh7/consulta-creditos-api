@@ -1,1 +1,77 @@
-<h1>Consulta Creditos</h1>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Consulta de Créditos</h5>
+            <small class="text-white-50">Pesquise por NFS-e ou número do crédito</small>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="consultaForm" (ngSubmit)="consultar()">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="numeroNfse" class="form-label">Número da NFS-e</label>
+                        <input type="text" class="form-control" id="numeroNfse" formControlName="numeroNfse"
+                            placeholder="Digite o número da NFS-e">
+                        <div *ngIf="consultaForm.get('numeroNfse')?.invalid && consultaForm.get('numeroNfse')?.touched"
+                            class="text-danger">
+                            Número da NFS-e é obrigatório
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="numeroCredito" class="form-label">Número do Crédito (opcional)</label>
+                        <input type="text" class="form-control" id="numeroCredito" formControlName="numeroCredito"
+                            placeholder="Digite o número do crédito">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary" [disabled]="consultaForm.invalid || isLoading">
+                            <span *ngIf="!isLoading">Consultar</span>
+                            <span *ngIf="isLoading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Carregando...
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div *ngIf="creditos.length > 0" class="mt-4">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Número do Crédito</th>
+                                <th>Número da NFS-e</th>
+                                <th>Data Constituição</th>
+                                <th>Valor ISSQN</th>
+                                <th>Tipo Crédito</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let credito of creditos">
+                                <td>{{credito.numeroCredito}}</td>
+                                <td>{{credito.numeroNfse}}</td>
+                                <td>{{credito.dataConstituicao | date:'dd/MM/yyyy'}}</td>
+                                <td>{{credito.valorIssqn | currency:'BRL'}}</td>
+                                <td>{{credito.tipoCredito}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        (click)="verDetalhes(credito.numeroCredito)">
+                                        <i class="bi bi-eye-fill"></i> Ver
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div *ngIf="creditos.length === 0 && consultaForm.touched && !isLoading" class="alert alert-info mt-3">
+                Nenhum crédito encontrado com os critérios informados.
+            </div>
+        </div>
+    </div>
+</div>
