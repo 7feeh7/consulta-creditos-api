@@ -2,6 +2,7 @@ package com.consulta_creditos_api.controller;
 
 import com.consulta_creditos_api.model.Credito;
 import com.consulta_creditos_api.service.CreditoService;
+import com.consulta_creditos_api.service.KafkaPublisherService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,6 +24,9 @@ public class CreditoControllerTest {
     @MockBean
     private CreditoService creditoService;
 
+    @MockBean
+    private KafkaPublisherService kafkaPublisherService;
+
     @Test
     void listarPorNfse_deveRetornarLista() throws Exception {
         Credito c1 = new Credito();
@@ -32,6 +36,8 @@ public class CreditoControllerTest {
         mockMvc.perform(get("/api/creditos/7891011"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));
+
+        verify(kafkaPublisherService).publishConsulta("Consulta por NFS-e: 7891011");
     }
 
     @Test
