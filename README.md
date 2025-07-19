@@ -1,16 +1,9 @@
-# consulta-creditos-api
+# Sistema de Consulta de Créditos
 
-API RESTful para consulta de créditos fiscais, com front-end Angular, mensageria Kafka, containerizados com Docker. Projeto seguindo boas práticas de Clean Code, SOLID e MVC.
+Aplicação full-stack para consulta de créditos, com Java Springboot, frontend Angular, mensageria Kafka e banco de dados PostgreSQL, containerizados com Docker.
 
 ## Tecnologias
 
-- [Node.js](https://nodejs.org/en/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Express](https://expressjs.com/pt-br/)
-- [MongoDB](https://www.mongodb.com/)
-- [Redis](https://redis.io/)
-- 
-- 
 - [Java 21+](https://www.java.com/pt-BR/)
 - [Spring Data JPA / Hibernate](https://spring.io/projects/spring-data)
 - [PostgreSQL](https://www.postgresql.org/)
@@ -49,7 +42,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 1. Clonar o repositório:
 
    ```bash
-   git clone https://github.com/7feeh7/checkout-service.git
+   git clone https://github.com/7feeh7/consulta-creditos-api.git
    ```
 
 2. Subindo o projeto com Docker:
@@ -64,6 +57,13 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 - Swagger: http://localhost:8080/swagger-ui.html
 - Banco: localhost:5433 (postgres/postgres, base: creditos)
 - Kafka: localhost:9092
+
+## Comandos úteis
+
+- **Parar o serviço**:
+  ```bash
+  docker-compose down
+  ```
 
 ## Documentação
 
